@@ -72,7 +72,7 @@ class emrQA(MultiQA_DataSet):
                                                             "title":topic['title']}]},
                                  "qas": qas})
 
-
+        print(contexts)
         if sample_size != None:
             contexts = contexts[0:sample_size]
         contexts = preprocessor.tokenize_and_detect_answers(contexts)

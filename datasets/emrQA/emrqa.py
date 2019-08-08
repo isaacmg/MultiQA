@@ -6,13 +6,13 @@ from common.uuid import gen_uuid
 import tqdm
 
 
-class SQuAD(MultiQA_DataSet):
+class emrQA(MultiQA_DataSet):
     """
 
     """
 
     def __init__(self):
-        self.DATASET_NAME = 'SQuAD'
+        self.DATASET_NAME = 'emrQA'
 
     @overrides
     def build_header(self, preprocessor, contexts, split, dataset_version, dataset_flavor, dataset_specific_props):
@@ -40,33 +40,31 @@ class SQuAD(MultiQA_DataSet):
 
     @overrides
     def build_contexts(self, preprocessor, split, sample_size, dataset_version, dataset_flavor, dataset_specific_props, input_file):
-        single_file_path = cached_path("https://rajpurkar.github.io/SQuAD-explorer/dataset/" + 		         
-                                        split + "-v" + dataset_version.replace('-','.') +".json")	
+        single_file_path = "emrqa.json"
+
         with open(single_file_path, 'r') as myfile:
             original_dataset = json.load(myfile)
 
         contexts = []
         data = original_dataset['data']
 
-
+        counter = 0
         for topic in tqdm.tqdm(data, total=len(data), ncols=80):
             for paragraph in topic['paragraphs']:
                 qas = []
                 for qa in paragraph['qas']:
-                    new_qa = {'qid':self.DATASET_NAME + '_q_' + qa['id'],
+                    counter +=1
+                    new_qa = {'qid':self.DATASET_NAME + '_q_' + str(counter),
                                 'question':qa['question']}
                     answer_candidates = []
-                    if 'is_impossible' in qa and qa['is_impossible']:
-                        new_qa['answers'] = {"open-ended": {'cannot_answer': 'yes'}}
-                        new_qa['metadata'] = {'plausible_answers': qa['plausible_answers']}
-                    else:
-                        for answer_candidate in qa['answers']:
-                            answer_candidates.append({'extractive':{"single_answer":{"answer": answer_candidate['text'],
-                                "instances": [{'doc_id':0,
-                                           'part':'text',
-                                           'start_byte':answer_candidate['answer_start'],
-                                           'text':answer_candidate['text']}]}}})
-                        new_qa['answers'] = {"open-ended": {'answer_candidates': answer_candidates}}
+                    
+                    for answer_candidate in qa['answers']:
+                        answer_candidates.append({'extractive':{"single_answer":{"answer": answer_candidate['text'],
+                            "instances": [{'doc_id':0,
+                                        'part':'text',
+                                        'start_byte':answer_candidate['answer_start'],
+                                        'text':answer_candidate['text']}]}}})
+                    new_qa['answers'] = {"open-ended": {'answer_candidates': answer_candidates}}
                     qas.append(new_qa)
 
                 contexts.append({"id": self.DATASET_NAME + '_'  + gen_uuid(),

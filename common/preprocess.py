@@ -283,7 +283,7 @@ class MultiQAPreProcess:
                             self.char_span_to_token_span(instance, document['tokens'][instance['part']])
                         except:
                             single_item['instances'].remove(instance)
-                            if count//300 == 0:
+                            if count%300 == 0:
                                 print(count)
                                 count+=1
                                 print('error in char_span_to_token_span, remove instance')

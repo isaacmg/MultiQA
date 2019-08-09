@@ -244,6 +244,7 @@ class MultiQAPreProcess:
                 document['tokens'][part] = [(t.text, t.idx) for t in part_tokens]
 
     def preprocess_context(self, context, search_answer_within_supp_context):
+        count = 0 
         # tokenizing contexts:
         for document in context['context']['documents']:
             self.tokenize_context(document)
@@ -274,7 +275,7 @@ class MultiQAPreProcess:
                         if "list" in answer_cand['extractive']:
                             answer_cand_list += [answer for answer in answer_cand['extractive']['list']]
 
-            count = 0 
+            
             for single_item in answer_cand_list:
                 
                 if 'instances' in single_item:

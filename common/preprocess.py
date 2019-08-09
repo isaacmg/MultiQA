@@ -244,9 +244,6 @@ class MultiQAPreProcess:
                 document['tokens'][part] = [(t.text, t.idx) for t in part_tokens]
 
     def preprocess_context(self, context, search_answer_within_supp_context):
-
-
-
         # tokenizing contexts:
         for document in context['context']['documents']:
             self.tokenize_context(document)

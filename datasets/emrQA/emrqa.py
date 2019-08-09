@@ -55,7 +55,7 @@ class emrQA(MultiQA_DataSet):
                 for qa in paragraph['qas']:
                     counter +=1
                     new_qa = {'qid':self.DATASET_NAME + '_q_' + str(counter),
-                                'question':qa['question']}
+                                'question':qa['question'][0]}
                     answer_candidates = []
                     
                     for answer_candidate in qa['answers']:
@@ -66,18 +66,14 @@ class emrQA(MultiQA_DataSet):
                                         'text':answer_candidate['text']}]}}})
                     new_qa['answers'] = {"open-ended": {'answer_candidates': answer_candidates}}
                     qas.append(new_qa)
-
+                paragraph['context'] = "".join(paragraph['context'])
+                paragraph['context'] = paragraph['context'].replace("\n"," ")
                 contexts.append({"id": self.DATASET_NAME + '_'  + gen_uuid(),
-                                 "context": {"documents": [{"text": paragraph['context'],
-                                                            "title":topic['title']}]},
-                                 "qas": qas})
-
+                                "context": {"documents": [{"text": paragraph['context'],
+                                                            "title":topic['title']}]}, "qas": qas})
         if sample_size != None:
             contexts = contexts[0:sample_size]
-        try:
-            contexts = preprocessor.tokenize_and_detect_answers(contexts)
-        except:
-            print(contexts)
-            
 
+        contexts = preprocessor.tokenize_and_detect_answers(contexts)
+        
         return contexts

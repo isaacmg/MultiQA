@@ -274,9 +274,9 @@ class MultiQAPreProcess:
                         if "list" in answer_cand['extractive']:
                             answer_cand_list += [answer for answer in answer_cand['extractive']['list']]
 
-
+            count = 0 
             for single_item in answer_cand_list:
-                count = 0 
+                
                 if 'instances' in single_item:
                     for instance in single_item['instances']:
                         try:
@@ -285,6 +285,7 @@ class MultiQAPreProcess:
                             single_item['instances'].remove(instance)
                             if count//300 == 0:
                                 print(count)
+                                count+=1
                                 print('error in char_span_to_token_span, remove instance')
                 else:
                     single_item['instances'] = []

@@ -276,13 +276,16 @@ class MultiQAPreProcess:
 
 
             for single_item in answer_cand_list:
+                count = 0 
                 if 'instances' in single_item:
                     for instance in single_item['instances']:
                         try:
                             self.char_span_to_token_span(instance, document['tokens'][instance['part']])
                         except:
                             single_item['instances'].remove(instance)
-                            print('error in char_span_to_token_span, remove instance')
+                            if count//300 == 0:
+                                print(count)
+                                print('error in char_span_to_token_span, remove instance')
                 else:
                     single_item['instances'] = []
                     aliases = [single_item['answer']]

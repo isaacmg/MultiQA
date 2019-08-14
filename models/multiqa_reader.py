@@ -345,6 +345,8 @@ class MultiQAReader(DatasetReader):
                 inst['text'] = qa['question'] + ' [SEP] ' + unproc_context['full_text'][context_char_offset: \
                             context_char_offset + curr_context_tokens[-1][1] + len(curr_context_tokens[-1][0]) + 1 - question_char_offset]
                 inst['answers'] = []
+                print("QA data list below ")
+                print(qa['answer_text_list'])
                 qa_metadata = {'has_answer': False, 'dataset': header['dataset_name'], "question_id": qa['qid'], \
                                'answer_texts_list': list(set(qa['answer_text_list']))}
                 for answer in qa['detected_answers']:

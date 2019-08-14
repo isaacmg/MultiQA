@@ -31,7 +31,7 @@ def main():
     header, contexts = factory.build_dataset(args.dataset_name, args.split, args.dataset_version, args.dataset_flavor, args.dataset_specific_props, \
                                              preprocessor, args.sample_size, args.input_file)
     print('------- dataset header --------')
-    print(json.dumps({'header': header}, indent=4))
+    print(json.dumps({'header': header}))
 
 
     if args.header_file is not None:

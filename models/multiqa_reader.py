@@ -348,8 +348,15 @@ class MultiQAReader(DatasetReader):
                 print("QA data list below here")
                 print("answer list")
                 print(qa['answer_text_list'])
-                qa_metadata = {'has_answer': False, 'dataset': header['dataset_name'], "question_id": qa['qid'], \
-                               'answer_texts_list': list(set(qa['answer_text_list']))}
+                try:
+                    qa_metadata = {'has_answer': False, 'dataset': header['dataset_name'], "question_id": qa['qid'], \
+                                'answer_texts_list': list(set(qa['answer_text_list']))}
+                except:
+                    # TODO add moving converting code
+                    {'has_answer': False, 'dataset': header['dataset_name'], "question_id": qa['qid'], \
+                                'answer_texts_list': ["s","s"]}
+                    print ("Problem with the meta data conversion")
+
                 for answer in qa['detected_answers']:
                     if len(answer['token_spans']) > 0 and answer['token_spans'][0] >= window_start_token_offset and \
                         answer['token_spans'][1] < window_end_token_offset:

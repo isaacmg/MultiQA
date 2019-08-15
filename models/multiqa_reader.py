@@ -356,6 +356,7 @@ class MultiQAReader(DatasetReader):
                     {'has_answer': False, 'dataset': header['dataset_name'], "question_id": qa['qid'], \
                                 'answer_texts_list': ["s","s"]}
                     print ("Problem with the meta data conversion")
+                    print(qa["answer_text_list"])
 
                 for answer in qa['detected_answers']:
                     if len(answer['token_spans']) > 0 and answer['token_spans'][0] >= window_start_token_offset and \
@@ -412,7 +413,10 @@ class MultiQAReader(DatasetReader):
     def _read(self, file_path: str):
         # supporting multi-dataset training:
         datasets = []
+        print(file_path)
+        print("debug shit")
         for ind, single_file_path in enumerate(file_path.split(',')):
+            print(single_file_path)
             single_file_path_cached = cached_path(single_file_path)
             zip_handle = gzip.open(single_file_path_cached, 'rb')
             datasets.append({'single_file_path':single_file_path, \

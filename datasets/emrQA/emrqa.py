@@ -61,8 +61,13 @@ class emrQA(MultiQA_DataSet):
                     
                     for answer_candidate in qa['answers']:
                         if type(answer_candidate["text"])==list:
-                            print("Detected multi-prong answer using first element")
-                            print(answer_candidate["text"])
+                            print("Detected multi-prong answer")
+                            if len(answer_candidate["text"][0])>1:
+                                answer_candidate["text"] == answer_candidate[0]
+                            elif len(answer_candidate["text"])>1: 
+                                # If answer candidate is nothing use second one
+                                answer_candidate["text"] = answer_candidate["text"][1]
+                            
                             
                         answer_candidates.append({'extractive':{"single_answer":{"answer": answer_candidate['text'],
                             "instances": [{'doc_id':0,

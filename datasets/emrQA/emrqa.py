@@ -60,10 +60,11 @@ class emrQA(MultiQA_DataSet):
                     answer_candidates = []
                     
                     for answer_candidate in qa['answers']:
-                        if type(answer_candidate["text"][0])==list:
+                        print(type(answer_candidate["text"]))
+                        if type(answer_candidate["text"])==list:
                             print("Detected multi-prong answer using first element")
-                            print(answer_candidate)
-                            if len(answer_candidate["text"][0][0]) > 0:
+                            print(answer_candidate["text"])
+                            if len(answer_candidate["text"][0]) > 0:
                                 answer_candidate["text"] = answer_candidates[0]
                             elif len(answer_candidate["text"])>1:
                                 if len(answer_candidate["text"][1][0])>0:

@@ -353,6 +353,7 @@ class MultiQAReader(DatasetReader):
                                 'answer_texts_list': list(set(qa['answer_text_list']))}
                 except:
                     # TODO add moving converting code
+                    # Fix nested sub lists
                     {'has_answer': False, 'dataset': header['dataset_name'], "question_id": qa['qid'], \
                                 'answer_texts_list': ["s","s"]}
                     print ("Problem with the meta data conversion")

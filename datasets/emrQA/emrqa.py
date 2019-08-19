@@ -54,16 +54,28 @@ class emrQA(MultiQA_DataSet):
                 qas = []
                 for qa in paragraph['qas']:
                     counter +=1
+                    # Use only first question
                     new_qa = {'qid':self.DATASET_NAME + '_q_' + str(counter),
                                 'question':qa['question'][0]}
                     answer_candidates = []
                     
                     for answer_candidate in qa['answers']:
+                        if type(answer_candidate["text"][0])==list:
+                            print("Detected multi-prong answer using first element")
+                            print(answer_candidate)
+                            if len(answer_candidate["text"][0][0]) > 0:
+                                answer_candidate["text"] = answer_candidates[0]
+                            elif len(answer_candidate["text"])>1:
+                                if len(answer_candidate["text"][1][0])>0:
+                                    answer_candidate["text"] = answer_candidate["text"]
                         answer_candidates.append({'extractive':{"single_answer":{"answer": answer_candidate['text'],
                             "instances": [{'doc_id':0,
                                         'part':'text',
                                         'start_byte':answer_candidate['answer_start'],
                                         'text':answer_candidate['text']}]}}})
+                    
+                    
+        
                     new_qa['answers'] = {"open-ended": {'answer_candidates': answer_candidates}}
                     qas.append(new_qa)
                 paragraph['context'] = "".join(paragraph['context'])

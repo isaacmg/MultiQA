@@ -63,9 +63,11 @@ class emrQA(MultiQA_DataSet):
                         if type(answer_candidate["text"])==list:
                             print("Detected multi-prong answer")
                             if len(answer_candidate["text"][0])>1:
-                                answer_candidate["text"] == answer_candidate[0]
+                                print("Using first answer")
+                                answer_candidate["text"] == answer_candidate["text"][0]
                             elif len(answer_candidate["text"])>1: 
                                 # If answer candidate is nothing use second one
+                                print("First answer blank using second answer")
                                 answer_candidate["text"] = answer_candidate["text"][1]
                             
                             

@@ -65,6 +65,7 @@ class emrQA(MultiQA_DataSet):
                             if len(answer_candidate["text"][0])>1:
                                 print("Using first answer")
                                 answer_candidate["text"] == answer_candidate["text"][0]
+                                print(answer_candidate["text"])
                             elif len(answer_candidate["text"])>1: 
                                 # If answer candidate is nothing use second one
                                 print("First answer blank using second answer")

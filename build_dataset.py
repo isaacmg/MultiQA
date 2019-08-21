@@ -77,11 +77,9 @@ def main():
 
         with open(args.output_file.replace('.gz',''), "w") as f:
             # first JSON line is header
-            print("dump header here")
             f.write(json.dumps({'header': header}) + '\n')
             for instance in contexts:
                 if args.save_in_sample_format:
-                    print("pretty")
                     s = json.dumps(instance, indent=4)
                     # just making the answer starts in the sample no have a newline for every offset..
                     s = re.sub('\n\s*(\d+)', r'\1', s)

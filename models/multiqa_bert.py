@@ -199,10 +199,11 @@ class MultiQA_BERT(Model):
                     print(squad_eval.f1)
                     print(best_span_string)
                     print(gold_answer_texts)
-                self._official_f1(100 * f1_score)
-                self._official_EM(100 * EM_score)
-                output_dict['EM'].append(100 * EM_score)
-                output_dict['f1'].append(100 * f1_score)
+                    self._official_f1(100 * f1_score)
+                    self._official_EM(100 * EM_score)
+                    output_dict['EM'].append(100 * EM_score)
+                    output_dict['f1'].append(100 * f1_score)
+                    break 
 
 
         return output_dict

@@ -198,12 +198,12 @@ class MultiQA_BERT(Model):
                     self._official_EM(100 * EM_score)
                     output_dict['EM'].append(100 * EM_score)
                     output_dict['f1'].append(100 * f1_score)
-                    print(squad_eval.f1)
+                    print(squad_eval.f1_score)
                     print(best_span_string)
                     print(gold_answer_texts)
                 except: 
                     print("Error computing F1 score")
-                    print(squad_eval.f1)
+                    print(squad_eval.f1_score)
                     print(best_span_string)
                     print(gold_answer_texts)
                     

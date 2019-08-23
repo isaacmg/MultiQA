@@ -194,15 +194,17 @@ class MultiQA_BERT(Model):
                 try: 
                     f1_score = squad_eval.metric_max_over_ground_truths(squad_eval.f1_score, best_span_string, gold_answer_texts)
                     EM_score = squad_eval.metric_max_over_ground_truths(squad_eval.exact_match_score, best_span_string, gold_answer_texts)
-                except: 
-                    print("Error computing F1 score")
-                    print(squad_eval.f1)
-                    print(best_span_string)
-                    print(gold_answer_texts)
                     self._official_f1(100 * f1_score)
                     self._official_EM(100 * EM_score)
                     output_dict['EM'].append(100 * EM_score)
                     output_dict['f1'].append(100 * f1_score)
+                    print(squad_eval.f1)
+                    print(best_span_string)
+                    print(gold_answer_texts)
+                except: 
+                    print("Error computing F1 score")
+                    
+                   
 
 
         return output_dict

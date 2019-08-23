@@ -203,6 +203,9 @@ class MultiQA_BERT(Model):
                     print(gold_answer_texts)
                 except: 
                     print("Error computing F1 score")
+                    print(squad_eval.f1)
+                    print(best_span_string)
+                    print(gold_answer_texts)
                     
                    
 

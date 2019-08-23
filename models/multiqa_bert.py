@@ -203,7 +203,6 @@ class MultiQA_BERT(Model):
                     self._official_EM(100 * EM_score)
                     output_dict['EM'].append(100 * EM_score)
                     output_dict['f1'].append(100 * f1_score)
-                    break 
 
 
         return output_dict

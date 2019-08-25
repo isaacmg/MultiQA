@@ -71,12 +71,12 @@ class emrQA(MultiQA_DataSet):
                                 print("First answer blank using second answer")
                                 answer_candidate["text"] = answer_candidate["text"][1]
                             
-                            
-                        answer_candidates.append({'extractive':{"single_answer":{"answer": answer_candidate['text'],
-                            "instances": [{'doc_id':0,
-                                        'part':'text',
-                                        'start_byte':answer_candidate['answer_start'],
-                                        'text':answer_candidate['text']}]}}})
+                        if answer_candidate["text"]!='':
+                            answer_candidates.append({'extractive':{"single_answer":{"answer": answer_candidate['text'],
+                                "instances": [{'doc_id':0,
+                                            'part':'text',
+                                            'start_byte':answer_candidate['answer_start'],
+                                            'text':answer_candidate['text']}]}}})
                     
                     
         

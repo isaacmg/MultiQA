@@ -72,12 +72,15 @@ class emrQA(MultiQA_DataSet):
                                 answer_candidate["text"] = answer_candidate["text"][1]
                             
                         if answer_candidate["text"]!='':
-                            answer_candidates.append({'extractive':{"single_answer":{"answer": answer_candidate['text'],
-                                "instances": [{'doc_id':0,
-                                            'part':'text',
-                                            'start_byte':answer_candidate['answer_start'],
-                                            'text':answer_candidate['text']}]}}})
-                    
+                            if answer_candidate["text"]=='no' or answer_candidate["text"]=='yes':
+                                answer_candidates.append({"yesno": {"single_answer":answer_candidate["text"]}})
+                            else:
+                                answer_candidates.append({'extractive':{"single_answer":{"answer": answer_candidate['text'],
+                                    "instances": [{'doc_id':0,
+                                                'part':'text',
+                                                'start_byte':answer_candidate['answer_start'],
+                                                'text':answer_candidate['text']}]}}})
+                        
                     
         
                     new_qa['answers'] = {"open-ended": {'answer_candidates': answer_candidates}}

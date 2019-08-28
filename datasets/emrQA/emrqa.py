@@ -80,6 +80,14 @@ class emrQA(MultiQA_DataSet):
                                                 'part':'text',
                                                 'start_byte':answer_candidate['answer_start'],
                                                 'text':answer_candidate['text']}]}}})
+                        else: 
+                            # Use evidence then 
+                            answer_candidate["text"] = answer_candidate["evidence"] 
+                            answer_candidates.append({'extractive':{"single_answer":{"answer": answer_candidate['text'],
+                                    "instances": [{'doc_id':0,
+                                                'part':'text',
+                                                'start_byte':answer_candidate['answer_start'],
+                                                'text':answer_candidate['text']}]}}})
                         
                     
         

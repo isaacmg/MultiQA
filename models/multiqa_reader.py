@@ -345,8 +345,20 @@ class MultiQAReader(DatasetReader):
                 inst['text'] = qa['question'] + ' [SEP] ' + unproc_context['full_text'][context_char_offset: \
                             context_char_offset + curr_context_tokens[-1][1] + len(curr_context_tokens[-1][0]) + 1 - question_char_offset]
                 inst['answers'] = []
-                qa_metadata = {'has_answer': False, 'dataset': header['dataset_name'], "question_id": qa['qid'], \
-                               'answer_texts_list': list(set(qa['answer_text_list']))}
+                #print("QA data list below here")
+                #print("answer list")
+                #print(qa['answer_text_list'])
+                try:
+                    qa_metadata = {'has_answer': False, 'dataset': header['dataset_name'], "question_id": qa['qid'], \
+                                'answer_texts_list': list(set(qa['answer_text_list']))}
+                except:
+                    # TODO add moving converting code
+                    # Fix nested sub lists
+                    {'has_answer': False, 'dataset': header['dataset_name'], "question_id": qa['qid'], \
+                                'answer_texts_list': ["s","s"]}
+                    print ("Problem with the meta data conversion")
+                    print(qa["answer_text_list"])
+
                 for answer in qa['detected_answers']:
                     if len(answer['token_spans']) > 0 and answer['token_spans'][0] >= window_start_token_offset and \
                         answer['token_spans'][1] < window_end_token_offset:
@@ -403,7 +415,10 @@ class MultiQAReader(DatasetReader):
     def _read(self, file_path: str):
         # supporting multi-dataset training:
         datasets = []
+        print(file_path)
+        print("debug shit")
         for ind, single_file_path in enumerate(file_path.split(',')):
+            print(single_file_path)
             single_file_path_cached = cached_path(single_file_path)
             zip_handle = gzip.open(single_file_path_cached, 'rb')
             datasets.append({'single_file_path':single_file_path, \

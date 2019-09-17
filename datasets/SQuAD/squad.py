@@ -10,7 +10,6 @@ logger = logging.getLogger(__name__)
 
 class SQuAD(MultiQA_DataSet):
     """
-
     """
     def __init__(self, preprocessor, split, dataset_version, dataset_flavor, dataset_specific_props, \
                  sample_size, max_contexts_in_file, custom_input_file):
@@ -56,6 +55,11 @@ class SQuAD(MultiQA_DataSet):
     def build_contexts(self):
         single_file_path = cached_path("https://rajpurkar.github.io/SQuAD-explorer/dataset/" + \
                                        self._split + "-v" + self._dataset_version.replace('-','.') +".json")
+
+
+    def build_contexts(self, preprocessor, split, sample_size, dataset_version, dataset_flavor, dataset_specific_props, input_file):
+        single_file_path = cached_path("https://rajpurkar.github.io/SQuAD-explorer/dataset/train-v2.0.json")
+        #https://rajpurkar.github.io/SQuAD-explorer/dataset/train-v2.0.json
 
         with open(single_file_path, 'r') as myfile:
             original_dataset = json.load(myfile)

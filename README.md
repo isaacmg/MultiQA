@@ -16,6 +16,8 @@ This project is constantly being improved. Contributions, comments and suggestio
 
 | Date | Message
 | :----- | :-----
+| Sep 15, 2019 | DROP and WikiHop added. 
+| Aug 31, 2019 | Version 0.1.0 of the MultiQA format is out, with a [json-schema](https://github.com/alontalmor/multiqa/blob/master/models/datasets/multiqa_jsonschema.json) for validation, and new pytests  
 | Aug 24, 2019 | New! convert multiqa format to SQuAD2.0 format + Pytorch-Transformers models support 
 | Aug 14, 2019 | BoolQ and ComplexWebQuestions data added. 
 | Aug 12, 2019 | multiqa.py added enabling easy multiple dataset training and evaluation. 
@@ -39,6 +41,8 @@ The MultiQA-5Base column contain the link to the model (in the header) and evalu
 | SearchQA | [data](https://multiqa.s3.amazonaws.com/data/SearchQA_train.jsonl.gz) | [data](https://multiqa.s3.amazonaws.com/data/SearchQA_dev.jsonl.gz) | 58.7 / 65.2 [(model)](https://multiqa.s3.amazonaws.com/models/BERTBase/SearchQA.tar.gz) | 58.8 / 65.3 | 60.5 / 67.3 [(model)](https://multiqa.s3.amazonaws.com/models/BERTLarge/SearchQA.tar.gz)  |  
 | BoolQ | [data](https://multiqa.s3.amazonaws.com/data/BoolQ_jsonl.gz) | [data](https://multiqa.s3.amazonaws.com/data/BoolQ_dev.jsonl.gz) | |  |   |  
 | ComplexWebQuestions | [data](https://multiqa.s3.amazonaws.com/data/ComplexWebQuestions_jsonl.gz) | [data](https://multiqa.s3.amazonaws.com/data/ComplexWebQuestions_dev.jsonl.gz) | |  |   |  
+| DROP | [data](https://multiqa.s3.amazonaws.com/data/DROP_jsonl.gz) | [data](https://multiqa.s3.amazonaws.com/data/DROP_dev.jsonl.gz) | |  |   |  
+| WikiHop | [data](https://multiqa.s3.amazonaws.com/data/WikiHop_jsonl.gz) | [data](https://multiqa.s3.amazonaws.com/data/WikiHop_dev.jsonl.gz) | |  |   |  
 | Natural Questions | Coming soon | Coming soon | Coming soon | Coming soon | Coming soon |  
 
 Datasets will be addeed weekly, so please stay tuned!
@@ -123,6 +127,7 @@ first argument is the allennlp model, second is the preprocessed evalutaion file
  
 ## Multiqa Data Format
 see [Readme](https://github.com/alontalmor/multiqa/blob/master/datasets/README.md) in the datasets folder.
+A [json-schema](https://json-schema.org/) for a single context in multiqa is available [here](https://github.com/alontalmor/multiqa/blob/master/models/datasets/multiqa_jsonschema.json).
 
 ## Training using AlleNLP
 see [Readme](https://github.com/alontalmor/multiqa/blob/master/models/README.md) in the models folder.
